@@ -37,6 +37,7 @@ yarn-error.log*
 # typescript
 next-env.d.ts
 /dist/
+/dist-static/
 /.wrangler/
 /outputs/
 /work/
@@ -51,3 +52,9 @@ next-env.d.ts
 /public/research-archive.html
 /public/content/
 /public/assets/
+
+# Tencent Cloud EdgeOne
+.env
+.edgeone/*
+.tef_dist/*
+  

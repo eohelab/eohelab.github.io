@@ -65,3 +65,12 @@ test("production root serves the static research-group homepage", async () => {
   assert.equal(await response.text(), "EOHE");
   assert.equal(requestedPath, "/eohe-home.html");
 });
+
+test("portable static build is ready for alternate hosting", async () => {
+  await Promise.all([
+    access(new URL("dist-static/index.html", root)),
+    access(new URL("dist-static/content/site-content.js", root)),
+    access(new URL("dist-static/news-brics-2026.html", root)),
+    access(new URL("dist-static/assets/liu-chong.jpg", root)),
+  ]);
+});

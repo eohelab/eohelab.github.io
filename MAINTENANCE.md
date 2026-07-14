@@ -23,14 +23,59 @@ updates do not require React or Cloudflare knowledge.
 ```sh
 pnpm dev
 pnpm build
+pnpm build:static
 ```
 
 The `sync:content` step copies the framework-independent site into `public/`
 before every preview or build. Treat the root HTML/CSS/JS files, `content/`, and
 `assets/` as the source of truth; do not edit generated copies under `public/`.
 
-## Deployment boundary
+`build:static` creates a portable `dist-static/` folder for domestic or other
+third-party static hosts. It contains a conventional root `index.html` plus all
+detail pages and assets, so it can be uploaded directly without a framework.
 
-`.openai/hosting.json` connects this folder to its Sites project. Keep its
-`project_id` unchanged. A future maintenance task should build, validate, save a
-new site version, and deploy that version after updating content.
+## Public deployment (Tencent CloudBase)
+
+The public site is hosted in the CloudBase environment
+`sysu-eohe-2026-d9gc38h0203342f7d` and is currently available at:
+
+`https://sysu-eohe-2026-d9gc38h0203342f7d-1453818758.tcloudbaseapp.com/`
+
+After editing content, build and deploy the portable output:
+
+```sh
+pnpm build:static
+tcb login
+tcb hosting deploy ./dist-static -e sysu-eohe-2026-d9gc38h0203342f7d
+```
+
+CloudBase credentials are local machine credentials and must never be added to
+the repository. The platform default domain is suitable for immediate access
+but has development-domain rate limits; bind an ICP-filed custom domain later
+for a permanent institutional production address.
+
+## Public deployment (GitHub Pages)
+
+The memorable public address is:
+
+`https://eohelab.github.io/`
+
+The repository is `eohelab/eohelab.github.io`. Every push to `main` triggers
+`.github/workflows/deploy-pages.yml`, which builds `dist-static/` and publishes
+it to GitHub Pages. Keep CloudBase online as the Chinese-mainland fallback.
+
+Normal GitHub publishing therefore consists of committing and pushing the
+source changes:
+
+```sh
+git add <changed-files>
+git commit -m "Describe the website update"
+git push github main
+```
+
+## Legacy Sites deployment
+
+`.openai/hosting.json` retains the earlier Sites project connection for
+reference. Keep its `project_id` unchanged, but use CloudBase as the primary
+public deployment target while `chatgpt.site` remains inaccessible on the
+user's network.
