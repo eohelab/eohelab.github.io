@@ -18,6 +18,19 @@ test("homepage has production and responsive essentials", async () => {
   assert.match(css, /@media\(max-width:430px\)/);
 });
 
+test("Chinese public copy identifies a research group, not a standalone lab", async () => {
+  const script = await readFile(new URL("script.js", root), "utf8");
+
+  assert.match(script, /navPeople:'课题组成员'/);
+  assert.match(script, /peopleEyebrow:'我们的课题组'/);
+  assert.match(script, /newsEyebrow:'课题组动态'/);
+  assert.match(script, /地球观测与人类环境课题组｜中山大学/);
+  assert.match(
+    script,
+    /地球观测与人类环境课题组 · 中山大学遥感科学与技术学院/,
+  );
+});
+
 test("news content is centralized and reverse chronological", async () => {
   const source = await readFile(new URL("content/site-content.js", root), "utf8");
   const context = { window: {} };
