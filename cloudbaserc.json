@@ -1,0 +1,15 @@
+{
+  "$schema": "https://static.cloudbase.net/cli/cloudbaserc.schema.json",
+  "envId": "sysu-eohe-2026-d9gc38h0203342f7d",
+  "functionRoot": "functions",
+  "functions": [
+    {
+      "name": "visitor-stats-api",
+      "runtime": "Nodejs20.19",
+      "handler": "index.main",
+      "timeout": 10,
+      "memorySize": 256,
+      "description": "Privacy-friendly aggregate visitor statistics for the EOHE website"
+    }
+  ]
+}

@@ -31,6 +31,23 @@ test("Chinese public copy identifies a research group, not a standalone lab", as
   );
 });
 
+test("visitor overview is responsive and privacy preserving", async () => {
+  const [html, css, script] = await Promise.all([
+    readFile(new URL("index.html", root), "utf8"),
+    readFile(new URL("visitor-stats.css", root), "utf8"),
+    readFile(new URL("script.js", root), "utf8"),
+  ]);
+
+  assert.match(html, /class="visitor-overview"/);
+  assert.match(html, /data-visitor-total/);
+  assert.match(html, /data-visitor-locations/);
+  assert.match(css, /\.visitor-overview-inner/);
+  assert.match(script, /不保存访客 IP 地址/);
+  assert.match(script, /visitor-stats-api/);
+  assert.doesNotMatch(script, /__VISITOR_STATS_ENDPOINT__/);
+  assert.doesNotMatch(script, /localStorage\.setItem\([^,]+,\s*(?:ip|location)/i);
+});
+
 test("news content is centralized and reverse chronological", async () => {
   const source = await readFile(new URL("content/site-content.js", root), "utf8");
   const context = { window: {} };
@@ -83,6 +100,7 @@ test("portable static build is ready for alternate hosting", async () => {
   await Promise.all([
     access(new URL("dist-static/index.html", root)),
     access(new URL("dist-static/content/site-content.js", root)),
+    access(new URL("dist-static/visitor-stats.css", root)),
     access(new URL("dist-static/news-brics-2026.html", root)),
     access(new URL("dist-static/assets/liu-chong.jpg", root)),
   ]);

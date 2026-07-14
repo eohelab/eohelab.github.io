@@ -49,6 +49,14 @@ tcb login
 tcb hosting deploy ./dist-static -e sysu-eohe-2026-d9gc38h0203342f7d
 ```
 
+### Visitor overview
+
+The footer-adjacent visitor module reads aggregate statistics from the
+`visitor-stats-api` CloudBase function. It counts a browser at most once per
+calendar day, stores only total and country/region counters, and never stores
+IP addresses. The function source is in `functions/visitor-stats`; its endpoint
+is configured as `VISITOR_STATS_ENDPOINT` in `script.js`.
+
 CloudBase credentials are local machine credentials and must never be added to
 the repository. The platform default domain is suitable for immediate access
 but has development-domain rate limits; bind an ICP-filed custom domain later

@@ -7,6 +7,7 @@ const publicDir = resolve(root, "public");
 const files = [
   ["index.html", "eohe-home.html"],
   ["styles.css", "styles.css"],
+  ["visitor-stats.css", "visitor-stats.css"],
   ["script.js", "script.js"],
   ["news-brics-2026.html", "news-brics-2026.html"],
   ["news-egu-2026.html", "news-egu-2026.html"],
