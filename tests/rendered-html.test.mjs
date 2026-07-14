@@ -42,3 +42,26 @@ test("production build contains the Sites worker and synchronized homepage", asy
     access(new URL("dist/.openai/hosting.json", root)),
   ]);
 });
+
+test("production root serves the static research-group homepage", async () => {
+  const workerUrl = new URL("dist/server/index.js", root);
+  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+  let requestedPath = null;
+  const response = await worker.fetch(
+    new Request("https://example.test/"),
+    {
+      ASSETS: {
+        fetch: async (request) => {
+          requestedPath = new URL(request.url).pathname;
+          return new Response("EOHE", { status: 200 });
+        },
+      },
+    },
+    { waitUntil() {}, passThroughOnException() {} },
+  );
+
+  assert.equal(response.status, 200);
+  assert.equal(await response.text(), "EOHE");
+  assert.equal(requestedPath, "/eohe-home.html");
+});

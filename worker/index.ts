@@ -34,7 +34,9 @@ const worker = {
     // retaining the Vinext worker as the deployment/build adapter.
     if (url.pathname === "/") {
       url.pathname = "/eohe-home.html";
-      return env.ASSETS.fetch(new Request(url, request));
+      return env.ASSETS.fetch(
+        new Request(url.toString(), { headers: request.headers }),
+      );
     }
 
     if (url.pathname === "/_vinext/image") {
