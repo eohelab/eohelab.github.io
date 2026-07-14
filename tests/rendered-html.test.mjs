@@ -48,6 +48,15 @@ test("visitor overview is responsive and privacy preserving", async () => {
   assert.doesNotMatch(script, /localStorage\.setItem\([^,]+,\s*(?:ip|location)/i);
 });
 
+test("data-product category labels stay bilingual and use building footprint terminology", async () => {
+  const script = await readFile(new URL("script.js", root), "utf8");
+
+  assert.match(script, /'01 \/ 地表覆盖','02 \/ 农业','03 \/ 建筑数据集'/);
+  assert.match(script, /'01 \/ LAND COVER','02 \/ AGRICULTURE','03 \/ BUILDING DATASET'/);
+  assert.match(script, /泛北极建筑足迹图集/);
+  assert.doesNotMatch(script, /建筑轮廓图集/);
+});
+
 test("news content is centralized and reverse chronological", async () => {
   const source = await readFile(new URL("content/site-content.js", root), "utf8");
   const context = { window: {} };
