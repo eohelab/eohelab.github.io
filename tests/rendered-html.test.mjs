@@ -57,6 +57,14 @@ test("data-product category labels stay bilingual and use building footprint ter
   assert.doesNotMatch(script, /建筑轮廓图集/);
 });
 
+test("student cards are ordered by entry year", async () => {
+  const script = await readFile(new URL("script.js", root), "utf8");
+
+  assert.match(script, /firstStudent=grid\.querySelector\('\.student-card'\)/);
+  assert.match(script, /grid\.insertBefore\(zhao,firstStudent\)/);
+  assert.match(script, /grid\.insertBefore\(card,join\)/);
+});
+
 test("news content is centralized and reverse chronological", async () => {
   const source = await readFile(new URL("content/site-content.js", root), "utf8");
   const context = { window: {} };
