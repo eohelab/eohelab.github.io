@@ -14,6 +14,7 @@ const files = [
   ["script.js", "script.js"],
   ["news-brics-2026.html", "news-brics-2026.html"],
   ["news-egu-2026.html", "news-egu-2026.html"],
+  ["news-jrs-arctic-greening-2026.html", "news-jrs-arctic-greening-2026.html"],
   ["research-archive.html", "research-archive.html"],
   ["content/site-content.js", "content/site-content.js"],
 ];

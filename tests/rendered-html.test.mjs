@@ -72,6 +72,7 @@ test("news content is centralized and reverse chronological", async () => {
   const news = context.window.EOHE_CONTENT.news;
 
   assert.ok(news.length >= 2);
+  assert.match(source, /Journal of Remote Sensing/);
   assert.deepEqual(
     news.map((item) => item.date),
     news.map((item) => item.date).slice().sort().reverse(),
@@ -80,6 +81,13 @@ test("news content is centralized and reverse chronological", async () => {
     assert.ok(item.zh?.title && item.en?.title && item.href);
     await access(new URL(item.href, root));
   }
+});
+
+test("Journal of Remote Sensing news uses the official online-paper link", async () => {
+  const page = await readFile(new URL("news-jrs-arctic-greening-2026.html", root), "utf8");
+  assert.match(page, /Anthropogenic disturbance dampens climate-driven greening in the Arctic/);
+  assert.match(page, /https:\/\/spj\.science\.org\/doi\/abs\/10\.34133\/remotesensing\.1062/);
+  assert.match(page, /Article in Press/);
 });
 
 test("production build contains the Sites worker and synchronized homepage", async () => {
@@ -119,6 +127,7 @@ test("portable static build is ready for alternate hosting", async () => {
     access(new URL("dist-static/content/site-content.js", root)),
     access(new URL("dist-static/visitor-stats.css", root)),
     access(new URL("dist-static/news-brics-2026.html", root)),
+    access(new URL("dist-static/news-jrs-arctic-greening-2026.html", root)),
     access(new URL("dist-static/assets/liu-chong.jpg", root)),
   ]);
 });
