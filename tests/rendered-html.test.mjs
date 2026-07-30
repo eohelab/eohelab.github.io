@@ -60,9 +60,22 @@ test("data-product category labels stay bilingual and use building footprint ter
 test("student cards are ordered by entry year", async () => {
   const script = await readFile(new URL("script.js", root), "utf8");
 
-  assert.match(script, /firstStudent=grid\.querySelector\('\.student-card'\)/);
-  assert.match(script, /grid\.insertBefore\(zhao,firstStudent\)/);
-  assert.match(script, /grid\.insertBefore\(card,join\)/);
+  const years = [...script.matchAll(/硕士研究生 · (202\d)级/g)].map((match) => match[1]);
+  assert.deepEqual(years.slice(0, 4), ["2024", "2025", "2025", "2026"]);
+});
+
+test("people section distinguishes PI, students, and academic advisor", async () => {
+  const [script, css] = await Promise.all([
+    readFile(new URL("script.js", root), "utf8"),
+    readFile(new URL("people.css", root), "utf8"),
+  ]);
+
+  assert.match(script, /课题组负责人 <span>Principal Investigator<\/span>/);
+  assert.match(script, /学生 <span>Students<\/span>/);
+  assert.match(script, /学术顾问 <span>Academic Advisor<\/span>/);
+  assert.match(script, /程晓/);
+  assert.match(script, /assets\/cheng-xiao\.png/);
+  assert.match(css, /\.advisor-card/);
 });
 
 test("news content is centralized and reverse chronological", async () => {
@@ -126,8 +139,10 @@ test("portable static build is ready for alternate hosting", async () => {
     access(new URL("dist-static/index.html", root)),
     access(new URL("dist-static/content/site-content.js", root)),
     access(new URL("dist-static/visitor-stats.css", root)),
+    access(new URL("dist-static/people.css", root)),
     access(new URL("dist-static/news-brics-2026.html", root)),
     access(new URL("dist-static/news-jrs-arctic-greening-2026.html", root)),
     access(new URL("dist-static/assets/liu-chong.jpg", root)),
+    access(new URL("dist-static/assets/cheng-xiao.png", root)),
   ]);
 });
