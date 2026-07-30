@@ -49,15 +49,68 @@ Object.assign(copy.en,{visitorEyebrow:'VISITOR OVERVIEW',visitorTitle:'Across on
 Object.assign(copy.zh,{visitorEyebrow:'访问概览',visitorTitle:'来自同一个星球的相遇',visitorLead:'以保护隐私的方式，记录这个网站与世界的连接。',visitorTotalLabel:'累计访问',visitorLocationsLabel:'访客来源',visitorLoading:'正在读取统计…',visitorPrivacy:'仅汇总国家和地区；不保存访客 IP 地址。',visitorEmpty:'新的访问将在这里出现。',visitorUnavailable:'统计暂时不可用'});
 Object.values(copy).forEach(dictionary=>Object.keys(dictionary).forEach(key=>{dictionary[key]=dictionary[key].replace(/<span>(.*?)<\/span>/g,'$1');}));
 let lang='zh';
-function renderPeople(){const grid=document.querySelector('.people-grid');if(!grid)return;const lead=grid.querySelector('.lead').outerHTML;const join=grid.querySelector('.join-card').outerHTML;const students=lang==='zh'?'<article class="person student-card"><img class="person-photo" src="assets/wang-jiayi.jpg" alt="王佳怡"><p class="role">硕士研究生 · 2025级</p><h3>王佳怡</h3><p>北极荒野道路遥感监测与环境效应分析</p></article><article class="person student-card"><img class="person-photo" src="assets/guo-yize.jpg" alt="郭议泽"><p class="role">硕士研究生 · 2025级</p><h3>郭议泽</h3><p>高纬度生态系统地表反照率遥感反演与变化分析</p></article>':'<article class="person student-card"><img class="person-photo" src="assets/wang-jiayi.jpg" alt="Jiayi Wang"><p class="role">MASTER’S STUDENT · 2025</p><h3>Jiayi Wang</h3><p>Remote sensing monitoring of Arctic wilderness roads and their environmental effects</p></article><article class="person student-card"><img class="person-photo" src="assets/guo-yize.jpg" alt="Yize Guo"><p class="role">MASTER’S STUDENT · 2025</p><h3>Yize Guo</h3><p>Remote sensing retrieval and change analysis of high-latitude ecosystem surface albedo</p></article>';grid.innerHTML=lead+students+join;}
+function renderPeople(){
+  const grid=document.querySelector('.people-grid');
+  if(!grid)return;
+  const zh=lang==='zh';
+  const students=zh?[
+    ['assets/zhao-shimeng.jpg','赵诗萌','硕士研究生 · 2024级','北极多年冻土地区单体建筑信息遥感检测与评估'],
+    ['assets/wang-jiayi.jpg','王佳怡','硕士研究生 · 2025级','北极荒野道路遥感监测与环境效应分析'],
+    ['assets/guo-yize.jpg','郭议泽','硕士研究生 · 2025级','高纬度生态系统地表反照率遥感反演与变化分析'],
+    ['assets/wang-peijie.jpg','王培杰','硕士研究生 · 2026级','多模态跨视角遥感城市数据融合']
+  ]:[
+    ['assets/zhao-shimeng.jpg','Shimeng Zhao','MASTER’S STUDENT · 2024','Remote sensing detection and assessment of individual buildings in Arctic permafrost regions'],
+    ['assets/wang-jiayi.jpg','Jiayi Wang','MASTER’S STUDENT · 2025','Remote sensing monitoring of Arctic wilderness roads and their environmental effects'],
+    ['assets/guo-yize.jpg','Yize Guo','MASTER’S STUDENT · 2025','Remote sensing retrieval and change analysis of high-latitude ecosystem surface albedo'],
+    ['assets/wang-peijie.jpg','Peijie Wang','MASTER’S STUDENT · 2026','Multimodal, cross-view remote-sensing data fusion for urban applications']
+  ];
+  const studentCards=students.map(([photo,name,role,topic])=>`<article class="person student-card"><img class="person-photo" src="${photo}" alt="${name}"><p class="role">${role}</p><h3>${name}</h3><p>${topic}</p></article>`).join('');
+  const lead=zh?`
+    <div class="people-group people-pi">
+      <p class="people-group-label">课题组负责人 <span>Principal Investigator</span></p>
+      <article class="person lead">
+        <div class="portrait portrait-lead"><img src="assets/liu-chong.jpg" alt="刘冲副教授"></div>
+        <div class="person-copy"><p class="role">课题组负责人 · 副教授</p><h3>刘冲</h3><p>遥感 · 地表覆盖变化 · 人地环境相互作用</p><a href="https://sges.sysu.edu.cn/teacher/380" target="_blank" rel="noopener">个人主页 ↗</a></div>
+      </article>
+    </div>`:`
+    <div class="people-group people-pi">
+      <p class="people-group-label">Principal Investigator <span>PI</span></p>
+      <article class="person lead">
+        <div class="portrait portrait-lead"><img src="assets/liu-chong.jpg" alt="Associate Professor Chong Liu"></div>
+        <div class="person-copy"><p class="role">PRINCIPAL INVESTIGATOR · ASSOCIATE PROFESSOR</p><h3>Chong Liu</h3><p>Remote sensing · Land-cover change · Human–environment interaction</p><a href="https://sges.sysu.edu.cn/teacher/380" target="_blank" rel="noopener">Profile ↗</a></div>
+      </article>
+    </div>`;
+  const advisor=zh?`
+    <div class="people-group people-advisor">
+      <p class="people-group-label">学术顾问 <span>Academic Advisor</span></p>
+      <article class="advisor-card">
+        <img class="advisor-photo" src="assets/cheng-xiao.png" alt="程晓教授">
+        <div class="advisor-copy">
+          <p class="role">教授 · 博士生导师 · 国家杰青</p>
+          <h3>程晓</h3>
+          <p>中山大学遥感科学与技术学院教授，长期致力于极地遥感与全球变化研究，先后参加中国第 16、22、24 和 32 次南极科学考察，并十余次赴北极考察。</p>
+          <p>围绕极地冰冻圈多要素、多源遥感反演、监测与变化机制分析取得系统性成果，推动“极鹰”系列极地遥感无人机、“冰路”极地遥感小卫星及“中山大学极地”号科考船建设，助力构建极地空—天—冰—海—潜立体观探测体系。在国内外发表论文百余篇，曾获北京青年“五四奖章”、“中国极地考察先进个人”等荣誉。</p>
+        </div>
+      </article>
+    </div>`:`
+    <div class="people-group people-advisor">
+      <p class="people-group-label">Academic Advisor</p>
+      <article class="advisor-card">
+        <img class="advisor-photo" src="assets/cheng-xiao.png" alt="Professor Xiao Cheng">
+        <div class="advisor-copy">
+          <p class="role">PROFESSOR · DOCTORAL SUPERVISOR · NSFC DISTINGUISHED YOUNG SCHOLAR</p>
+          <h3>Xiao Cheng</h3>
+          <p>Professor at the School of Remote Sensing and Geospatial Engineering, Sun Yat-sen University. His research focuses on polar remote sensing and global change. He has participated in four Chinese Antarctic expeditions and more than ten Arctic expeditions.</p>
+          <p>His work has advanced multi-source remote-sensing retrieval, monitoring, and change-mechanism analysis across the polar cryosphere. He has helped drive the development of the “Polar Hawk” UAV series, the “Binglu” polar remote-sensing satellite, and the research vessel <em>Sun Yat-sen University Polar</em>, contributing to an integrated air–space–ice–ocean–underwater polar observing system. He has published more than 100 papers and received honors including the Beijing Youth May Fourth Medal and the National Advanced Individual in Chinese Polar Research.</p>
+        </div>
+      </article>
+    </div>`;
+  const join=zh?'<article class="person join-card"><p class="eyebrow">下一个可能是你</p><h3>期待新成员加入。</h3><a class="button button-light" href="#join">查看机会 ↗</a></article>':'<article class="person join-card"><p class="eyebrow">NEXT COULD BE YOU</p><h3>We are growing.</h3><a class="button button-light" href="#join">See opportunities ↗</a></article>';
+  grid.innerHTML=`${lead}<div class="people-group people-students"><p class="people-group-label">${zh?'学生 <span>Students</span>':'Students'}</p><div class="student-grid">${studentCards}${join}</div></div>${advisor}`;
+}
 function render(){document.documentElement.lang=lang==='zh'?'zh-CN':'en';document.title=lang==='zh'?'地球观测与人类环境课题组｜中山大学':'Earth Observation & Human Environment Lab';document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=copy[lang][el.dataset.i18n]);document.querySelectorAll('[data-i18n-html]').forEach(el=>el.innerHTML=copy[lang][el.dataset.i18nHtml]);renderPeople();document.getElementById('languageToggle').textContent=lang==='zh'?'EN':'中';}
-const baseRender=render;render=()=>{baseRender();const grid=document.querySelector('.people-grid');const firstStudent=grid.querySelector('.student-card');const zhao=document.createElement('article');zhao.className='person student-card zhao';zhao.innerHTML=lang==='zh'?'<img class="person-photo" src="assets/zhao-shimeng.jpg" alt="赵诗萌"><p class="role">硕士研究生 · 2024级</p><h3>赵诗萌</h3><p>北极多年冻土地区单体建筑信息遥感检测与评估</p>':'<img class="person-photo" src="assets/zhao-shimeng.jpg" alt="Shimeng Zhao"><p class="role">MASTER’S STUDENT · 2024</p><h3>Shimeng Zhao</h3><p>Remote sensing detection and assessment of individual buildings in Arctic permafrost regions</p>';grid.insertBefore(zhao,firstStudent);};
 function renderResources(){const items=document.querySelectorAll('.resource-grid a');if(items.length<3)return;const labels=lang==='zh'?['01 / 地表覆盖','02 / 农业','03 / 建筑数据集']:['01 / LAND COVER','02 / AGRICULTURE','03 / BUILDING DATASET'];const actions=lang==='zh'?['访问数据集 ↗','在 GEE 中打开 ↗','访问数据集 ↗']:['Explore dataset ↗','Open in GEE ↗','Explore dataset ↗'];items.forEach((item,index)=>{item.querySelector('p').textContent=labels[index];item.querySelector('b').textContent=actions[index];});items[2].querySelector('h3').textContent='Pan-Arctic Building Footprint Atlas';}
 const renderWithResources=render;render=()=>{renderWithResources();renderResources();};
-function renderLead(){const lead=document.querySelector('.person.lead');if(!lead)return;lead.querySelector('.portrait-lead').innerHTML='<img src="assets/liu-chong.jpg" alt="刘冲副教授">';lead.querySelector('h3').textContent=lang==='zh'?'刘冲副教授':'Associate Professor Chong Liu';const link=lead.querySelector('a');link.href='https://sges.sysu.edu.cn/teacher/380';link.target='_blank';link.rel='noopener';link.textContent=lang==='zh'?'个人主页 ↗':'Profile ↗';}
-const renderWithLead=render;render=()=>{renderWithLead();renderLead();};
-function renderPeijie(){const grid=document.querySelector('.people-grid');const join=grid.querySelector('.join-card');const card=document.createElement('article');card.className='person student-card peijie';card.innerHTML=lang==='zh'?'<img class="person-photo" src="assets/wang-peijie.jpg" alt="王培杰"><p class="role">硕士研究生 · 2026级</p><h3>王培杰</h3><p>多模态跨视角遥感城市数据融合</p>':'<img class="person-photo" src="assets/wang-peijie.jpg" alt="Peijie Wang"><p class="role">MASTER’S STUDENT · 2026</p><h3>Peijie Wang</h3><p>Multimodal, cross-view remote-sensing data fusion for urban applications</p>';grid.insertBefore(card,join);}
-const renderWithPeijie=render;render=()=>{renderWithPeijie();renderPeijie();};
 function renderHomeStructure(){const main=document.querySelector('main');const hero=document.querySelector('.hero');const news=document.querySelector('.news');const intro=document.querySelector('.intro');const research=document.querySelector('.research');const signal=document.querySelector('.signal');const people=document.querySelector('.people');const outputs=document.querySelector('.outputs');const resources=document.querySelector('.resource-showcase');const join=document.querySelector('.join');const opportunities=document.querySelector('.opportunities');if(main&&hero&&news&&intro&&research&&signal&&people&&outputs&&resources&&join&&opportunities)main.append(hero,news,intro,research,signal,people,outputs,resources,join,opportunities);const projectColumn=document.querySelector('.output-columns .output-column');if(!projectColumn)return;projectColumn.querySelectorAll('.project-entry p')[0].textContent='2026–2028';projectColumn.querySelectorAll('.project-entry p')[1].textContent='2024–2027';let link=projectColumn.querySelector('.all-projects');if(!link){link=document.createElement('a');link.className='all-projects';projectColumn.appendChild(link);}link.href='research-archive.html';link.textContent=lang==='zh'?'查看全部项目 ↗':'View all projects ↗';}
 function renderArchive(){const archive=document.querySelector('.academic-record');if(!archive)return;archive.id='archive';let heading=archive.querySelector('.archive-heading');if(!heading){heading=document.createElement('div');heading.className='archive-heading';archive.prepend(heading);}heading.innerHTML=lang==='zh'?'<p class="eyebrow">研究档案</p><h2>全部项目与论文</h2>':'<p class="eyebrow">RESEARCH ARCHIVE</p><h2>All projects & publications</h2>';}
 function renderNews(){const list=document.querySelector('.news-list');if(!list)return;const records=(window.EOHE_CONTENT&&window.EOHE_CONTENT.news)||[];list.innerHTML=records.slice().sort((a,b)=>b.date.localeCompare(a.date)).map(item=>{const text=item[lang]||item.en;return `<article class="news-item"><time datetime="${item.date}">${item.displayDate}</time><div><p class="news-tag">${text.tag}</p><h3>${text.title}</h3></div><a href="${item.href}" aria-label="${text.ariaLabel}">↗</a></article>`}).join('');}
