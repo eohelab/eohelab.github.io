@@ -10,6 +10,7 @@ await mkdir(resolve(output, "content"), { recursive: true });
 const files = [
   ["index.html", "index.html"],
   ["styles.css", "styles.css"],
+  ["people.css", "people.css"],
   ["visitor-stats.css", "visitor-stats.css"],
   ["script.js", "script.js"],
   ["news-brics-2026.html", "news-brics-2026.html"],
