@@ -8,17 +8,17 @@
 window.EOHE_CONTENT = {
   news: [
     {
-      date: "2026-07-15",
-      displayDate: "07 / 2026",
+      date: "2026-08-05",
+      displayDate: "08 / 2026",
       href: "news-jrs-arctic-greening-2026.html",
       zh: {
         tag: "论文发表",
-        title: "课题组最新研究成果发表于 Journal of Remote Sensing",
+        title: "课题组最新研究成果正式发表于 Journal of Remote Sensing",
         ariaLabel: "阅读新闻详情",
       },
       en: {
         tag: "PUBLICATION",
-        title: "New research published in Journal of Remote Sensing",
+        title: "New research formally published in Journal of Remote Sensing",
         ariaLabel: "Read news story",
       },
     },

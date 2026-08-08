@@ -98,9 +98,11 @@ test("news content is centralized and reverse chronological", async () => {
 
 test("Journal of Remote Sensing news uses the official online-paper link", async () => {
   const page = await readFile(new URL("news-jrs-arctic-greening-2026.html", root), "utf8");
-  assert.match(page, /Anthropogenic disturbance dampens climate-driven greening in the Arctic/);
-  assert.match(page, /https:\/\/spj\.science\.org\/doi\/abs\/10\.34133\/remotesensing\.1062/);
-  assert.match(page, /Article in Press/);
+  assert.match(page, /Anthropogenic Disturbance Dampens Climate-Driven Greening in the Arctic/);
+  assert.match(page, /https:\/\/spj\.science\.org\/doi\/10\.34133\/remotesensing\.1062/);
+  assert.match(page, /Journal of Remote Sensing<\/em>, 6, Article 1062/);
+  assert.match(page, /2026 年 8 月 5 日/);
+  assert.doesNotMatch(page, /Article in Press/);
 });
 
 test("production build contains the Sites worker and synchronized homepage", async () => {
