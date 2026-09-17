@@ -57,12 +57,14 @@ function renderPeople(){
     ['assets/zhao-shimeng.jpg','赵诗萌','硕士研究生 · 2024级','北极多年冻土地区单体建筑信息遥感检测与评估'],
     ['assets/wang-jiayi.jpg','王佳怡','硕士研究生 · 2025级','北极荒野道路遥感监测与环境效应分析'],
     ['assets/guo-yize.jpg','郭议泽','硕士研究生 · 2025级','高纬度生态系统地表反照率遥感反演与变化分析'],
-    ['assets/wang-peijie.jpg','王培杰','硕士研究生 · 2026级','多模态跨视角遥感城市数据融合']
+    ['assets/wang-peijie.jpg','王培杰','硕士研究生 · 2026级','多模态跨视角遥感城市数据融合'],
+    ['assets/jin-xian.jpg','金显','本科生 · 大四','北极地表变化监测（暂定研究方向）']
   ]:[
     ['assets/zhao-shimeng.jpg','Shimeng Zhao','MASTER’S STUDENT · 2024','Remote sensing detection and assessment of individual buildings in Arctic permafrost regions'],
     ['assets/wang-jiayi.jpg','Jiayi Wang','MASTER’S STUDENT · 2025','Remote sensing monitoring of Arctic wilderness roads and their environmental effects'],
     ['assets/guo-yize.jpg','Yize Guo','MASTER’S STUDENT · 2025','Remote sensing retrieval and change analysis of high-latitude ecosystem surface albedo'],
-    ['assets/wang-peijie.jpg','Peijie Wang','MASTER’S STUDENT · 2026','Multimodal, cross-view remote-sensing data fusion for urban applications']
+    ['assets/wang-peijie.jpg','Peijie Wang','MASTER’S STUDENT · 2026','Multimodal, cross-view remote-sensing data fusion for urban applications'],
+    ['assets/jin-xian.jpg','Xian Jin','UNDERGRADUATE · FOURTH YEAR','Monitoring Arctic land-surface change (tentative research focus)']
   ];
   const studentCards=students.map(([photo,name,role,topic])=>`<article class="person student-card"><img class="person-photo" src="${photo}" alt="${name}"><p class="role">${role}</p><h3>${name}</h3><p>${topic}</p></article>`).join('');
   const lead=zh?`

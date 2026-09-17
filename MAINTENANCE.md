@@ -9,7 +9,7 @@ updates do not require React or Cloudflare knowledge.
 - Latest news: edit `content/site-content.js`, add the newest record at the top,
   and add its detail HTML page in the project root. Images belong in
   `assets/news/`.
-- Team members: update the `renderStudents` / `renderPeijie` content in
+- Team members: update the bilingual `renderPeople` content in
   `script.js`; place optimized portraits in `assets/`.
 - Projects and publications: edit `research-archive.html` for the full archive
   and the selected entries in `index.html` / `script.js` for the homepage.

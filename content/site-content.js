@@ -8,6 +8,13 @@
 window.EOHE_CONTENT = {
   news: [
     {
+      date: "2026-09-17",
+      displayDate: "09 / 2026",
+      href: "news-welcome-jin-xian-2026.html",
+      zh: { tag: "成员动态", title: "欢迎本科生金显加入课题组", ariaLabel: "阅读欢迎新闻" },
+      en: { tag: "NEW MEMBER", title: "Welcome undergraduate student Xian Jin to the lab", ariaLabel: "Read welcome news" },
+    },
+    {
       date: "2026-08-05",
       displayDate: "08 / 2026",
       href: "news-jrs-arctic-greening-2026.html",
