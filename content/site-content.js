@@ -11,8 +11,8 @@ window.EOHE_CONTENT = {
       date: "2026-10-14",
       displayDate: "10 / 2026",
       href: "news-bed-building-atlas-2026.html",
-      zh: { tag: "论文接收", title: "赵诗萌等关于泛北极建筑足迹图集的研究获 Big Earth Data 接收", ariaLabel: "阅读新闻详情" },
-      en: { tag: "PAPER ACCEPTED", title: "Shimeng Zhao and coauthors’ pan-Arctic building footprint atlas study accepted by Big Earth Data", ariaLabel: "Read news story" },
+      zh: { tag: "论文接收", title: "课题组泛北极建筑足迹图集研究成果获 Big Earth Data 接收", ariaLabel: "阅读新闻详情" },
+      en: { tag: "PAPER ACCEPTED", title: "Our pan-Arctic building footprint atlas study accepted by Big Earth Data", ariaLabel: "Read news story" },
     },
     {
       date: "2026-09-17",
